@@ -56,26 +56,34 @@ function CurrentResult() {
     );
     setFav(fav);
   }, [state.favsMovies]);
-
+  dispatch({ type: actionType.REST_ACTORS });
   const rottenTomato = Ratings?.some(
     (entry) => entry.Source === "Rotten Tomatoes"
   )
     ? Ratings.filter((entry) => entry.Source === "Rotten Tomatoes")
     : "Not available";
 
-  let youtubeElements = youtubeVideos.slice(0, 6).map((entry: youtubeData) => {
-    return <YoutubeVideo data={entry.video} key={entry.video.videoId} />;
-  });
+  let youtubeElements;
 
-  let ActorsElements = actorsData.map((actor, index) => {
-    return (
-      <ActorsElement
-        data={actor}
-        image={actorsImages[index]}
-        key={actor.results.primaryName}
-      />
-    );
-  });
+  if (youtubeVideos.length >= 1) {
+    youtubeElements = youtubeVideos.slice(0, 6).map((entry: youtubeData) => {
+      return <YoutubeVideo data={entry.video} key={entry.video.videoId} />;
+    });
+  }
+
+  let ActorsElements;
+
+  if (actorsData.length >= 1) {
+    ActorsElements = actorsData.map((actor, index) => {
+      return (
+        <ActorsElement
+          data={actor}
+          image={actorsImages[index]}
+          key={actor.results.primaryName}
+        />
+      );
+    });
+  }
 
   let streaming = () => {
     if (
