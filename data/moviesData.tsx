@@ -17,7 +17,7 @@ export let getMoviesInfo = async(type:string,movieName:string,page?:number) => {
     if (type === searchTypes.title) {
         try {
             let data = await fetchData(
-                "http://www.omdbapi.com/",
+                "https://www.omdbapi.com/",
                 getMoviesInfoOptions(movieName,page))           
             return data
         }catch(e:any){
