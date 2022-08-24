@@ -39,7 +39,7 @@ function getChosenMovieInfo(id:string){
 
 export let getChosenMovieData =async(id:string)=>{
     try {
-        let data = await fetchData("http://www.omdbapi.com/",getChosenMovieInfo(id))
+        let data = await fetchData("https://www.omdbapi.com/",getChosenMovieInfo(id))
         return data
     }catch(e){
         errorThrower("error accoured in fetching chosen movie data",e)
