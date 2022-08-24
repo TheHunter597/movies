@@ -64,11 +64,17 @@ function CurrentResult() {
     : "Not available";
 
   let youtubeElements = youtubeVideos.slice(0, 6).map((entry: youtubeData) => {
-    return <YoutubeVideo data={entry.video} />;
+    return <YoutubeVideo data={entry.video} key={entry.video.videoId} />;
   });
 
   let ActorsElements = actorsData.map((actor, index) => {
-    return <ActorsElement data={actor} image={actorsImages[index]} />;
+    return (
+      <ActorsElement
+        data={actor}
+        image={actorsImages[index]}
+        key={actor.results.primaryName}
+      />
+    );
   });
 
   let streaming = () => {
@@ -84,6 +90,7 @@ function CurrentResult() {
           <a
             href={state.chosenMovie.streamingServices.disney.us.link}
             target="_blank"
+            rel="noreferrer"
           >
             Disney
           </a>
@@ -99,6 +106,7 @@ function CurrentResult() {
           <a
             href={state.chosenMovie.streamingServices.netflix.us.link}
             target="_blank"
+            rel="noreferrer"
           >
             <RiNetflixFill />
           </a>
@@ -114,6 +122,7 @@ function CurrentResult() {
           <a
             href={state.chosenMovie.streamingServices.hbo.us.link}
             target="_blank"
+            rel="noreferrer"
           >
             <SiHbo />
           </a>

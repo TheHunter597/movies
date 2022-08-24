@@ -11,7 +11,13 @@ function FavMovies() {
   const [showScrollButtons, setShowScrollButtons] = useState(false);
   let moviesScroll = useRef<HTMLDivElement>(null);
   let result = favsMovies.slice(1).map((entry) => {
-    return <DropdownElement movie={entry.data} isInMoviesList={true} />;
+    return (
+      <DropdownElement
+        movie={entry.data}
+        isInMoviesList={true}
+        key={entry.data.Title}
+      />
+    );
   });
   return (
     <section
