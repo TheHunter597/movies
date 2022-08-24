@@ -67,7 +67,11 @@ function CurrentResult() {
 
   if (youtubeVideos.length >= 1) {
     youtubeElements = youtubeVideos.slice(0, 6).map((entry: youtubeData) => {
-      return <YoutubeVideo data={entry.video} key={entry.video.videoId} />;
+      return entry.video.videoId ? (
+        <YoutubeVideo data={entry.video} key={entry.video.videoId} />
+      ) : (
+        <div></div>
+      );
     });
   }
 
@@ -75,12 +79,14 @@ function CurrentResult() {
 
   if (actorsData.length >= 1) {
     ActorsElements = actorsData.map((actor, index) => {
-      return (
+      return actor.results.primaryName != undefined ? (
         <ActorsElement
           data={actor}
           image={actorsImages[index]}
           key={actor.results.primaryName}
         />
+      ) : (
+        <div></div>
       );
     });
   }
