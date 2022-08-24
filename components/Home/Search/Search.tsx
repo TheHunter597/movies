@@ -64,7 +64,7 @@ function Search() {
           {result}
         </div>
 
-        {showScrollButtons && state.result.data?.length ? (
+        {showScrollButtons && state.result.data?.length && !state.phoneUser ? (
           <div className={styles.Search__scroll}>
             <button
               className={styles.Search__scroll__left}

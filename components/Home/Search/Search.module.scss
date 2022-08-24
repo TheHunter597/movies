@@ -12,6 +12,7 @@
   }
   &__content {
     margin: auto;
+    width: min(90%, 1400px);
   }
   &__input {
     display: flex;
@@ -91,6 +92,9 @@
       cursor: pointer;
       &:hover {
         background-color: $primary-red;
+      }
+      @media (max-width: 600px) {
+        width: 10rem;
       }
     }
     &__next {

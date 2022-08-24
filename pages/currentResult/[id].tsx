@@ -171,7 +171,7 @@ function CurrentResult() {
       </div>
 
       <div className={styles.CurrentResult__info}>
-        <h3 className={styles.CurrentResult__title}>{`${Title}(${Year})`}</h3>
+        <h3 className={styles.CurrentResult__title}>{`${Title} ${Year}`}</h3>
         <h4 className={styles.CurrentResult__genres}>{Genre}</h4>
         <p className={styles.CurrentResult__plot}>{Plot}</p>
         <div className={styles.CurrentResult__services}>{streaming()}</div>

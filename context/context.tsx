@@ -96,6 +96,9 @@ function reducer(state: state, action: reducerAction): state {
           actors: { actorsInfo: [], actorsData: [], actorsImages: [] },
         },
       };
+    case actionType.CHANGE_PHONE_USER: {
+      return { ...state, phoneUser: action.value };
+    }
     default:
       return state;
   }
@@ -121,6 +124,7 @@ export let ContextProvider = (props: { children: any }) => {
     },
     favsMovies: [{}],
     fromOutsideLink: true,
+    phoneUser: false,
   } as state);
 
   let getAllData = async (fromOutside: boolean, id: string) => {

@@ -4,6 +4,8 @@
   display: grid;
   height: auto;
   position: relative;
+  width: 100%;
+  overflow-x: hidden;
   grid-template-columns: 1fr 3fr 3fr 2fr 1fr;
   grid-template-areas:
     ". . . . ."
@@ -13,6 +15,12 @@
     "mainCast mainCast mainCast mainCast mainCast"
     ". actors actors actors ."
     ". . . . .";
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin-inline: auto;
+  }
   &__addToFav {
     position: absolute;
     top: 2%;
@@ -27,14 +35,21 @@
   &__image {
     grid-area: image;
     margin-top: 3rem;
-    img {
-      width: 80%;
-      height: 100%;
+    text-align: center;
+    @media (max-width: 600px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
   }
   &__info {
     grid-area: info;
     margin-left: 4rem;
+    @media (max-width: 600px) {
+      margin-left: 0;
+      text-align: center;
+    }
   }
   &__title {
     font-size: $fs-XL;
@@ -73,6 +88,9 @@
   &__details {
     grid-area: details;
     margin: 6rem 0;
+    @media (max-width: 600px) {
+      text-align: center;
+    }
     p {
       border-bottom: 1px solid var(--tertiary-text-color);
       padding-top: 1rem;
@@ -92,7 +110,12 @@
   &__rating {
     display: flex;
     gap: 4rem;
-
+    @media (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
     div {
       display: flex;
       flex-direction: row;
@@ -115,19 +138,26 @@
       display: inline-block;
       margin: 2rem;
       @include makeShadow;
-      width: 16rem;
-      height: 20rem;
       position: relative;
       transition: all 0.5s;
+      width: 18rem;
+      height: 18rem;
+      @media (max-width: 600px) {
+        margin: 0;
+        margin-bottom: 2rem;
+        width: 90%;
+        height: 15rem;
+      }
       &:hover {
         transform: scale(1.05);
       }
     }
     h4 {
       position: absolute;
-      top: 65%;
+      top: 55%;
       color: $neutral-pale-red;
       text-align: center;
+      font-size: small;
     }
     img {
       width: 100%;
@@ -142,6 +172,10 @@
     grid-template-columns: repeat(2, 1fr);
     margin-inline: auto;
     gap: 5rem;
+    @media (max-width: 600px) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
   }
   &__mainCast {
     grid-area: mainCast;
