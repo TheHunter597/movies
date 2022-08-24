@@ -135,15 +135,18 @@ export let ContextProvider = (props: { children: any }) => {
     });
     /// get data about the actors
 
-    // let actorsData = await getActorsInfo("movie", id);
-    // dispatch({
-    //   type: actionType.CHANGE_ACTORS_INFO,
-    //   value: actorsData.data.actors.slice(0, 2),
-    // });
+    let actorsData = await getActorsInfo("movie", id);
+    dispatch({
+      type: actionType.CHANGE_ACTORS_INFO,
+      value: actorsData.data.actors.slice(0, 2),
+    });
 
     /// get data about the streaming avaliabilty is it available in netflix,hbo or disney
-    // let streamingData = await getStreamingData(id)
-    // dispatch({type:actionType.CHANGE_STREAMING_SERVICES,value:streamingData.data.streamingInfo})
+    let streamingData = await getStreamingData(id);
+    dispatch({
+      type: actionType.CHANGE_STREAMING_SERVICES,
+      value: streamingData.data.streamingInfo,
+    });
     /// get some youtube videos to display
     let youtubeData = await getYoutubeVideos(movieData?.data.Title);
     dispatch({
@@ -151,22 +154,22 @@ export let ContextProvider = (props: { children: any }) => {
       value: youtubeData?.data.contents,
     });
     /// after actors data arrive a call to another api is going to be done to get more data about the actor like image from google images api
-    // actorsData.data.actors
-    //   .slice(0, 2)
-    //   .map((entry: { id: string; name: string }, index: number) => {
-    //     setTimeout(async () => {
-    //       let actorData = await getActorsData(entry.id);
-    //       let actorImage = await getActorImage(entry.name);
-    //       dispatch({
-    //         type: actionType.CHANGE_ACTOR_IMAGE,
-    //         value: actorImage.data.response.images[0].image.url,
-    //       });
-    //       dispatch({
-    //         type: actionType.CHANGE_ACTOR_DATA,
-    //         value: actorData.data,
-    //       });
-    //     }, index * 500);
-    //   });
+    actorsData.data.actors
+      .slice(0, 2)
+      .map((entry: { id: string; name: string }, index: number) => {
+        setTimeout(async () => {
+          let actorData = await getActorsData(entry.id);
+          let actorImage = await getActorImage(entry.name);
+          dispatch({
+            type: actionType.CHANGE_ACTOR_IMAGE,
+            value: actorImage.data.response.images[0].image.url,
+          });
+          dispatch({
+            type: actionType.CHANGE_ACTOR_DATA,
+            value: actorData.data,
+          });
+        }, index * 500);
+      });
 
     /// fromOutside: if the user typed the name of the movie in the home page input field
     /// then chose from the list a movie then he is not coming from outside
@@ -175,12 +178,6 @@ export let ContextProvider = (props: { children: any }) => {
 
     /// user is going to get navigated to the page
     router.push(`/currentResult/${movieData?.data.imdbID}`);
-    // if (!fromOutside) {
-    //   setTimeout(async () => {
-    //     router.push(`/currentResult/${movieData?.data.imdbID}`);
-    //     window.scrollTo(0, 0);
-    //   }, 1000);
-    // }
   };
   return (
     <context.Provider value={{ state, dispatch, getAllData }}>

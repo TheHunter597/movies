@@ -18,10 +18,6 @@ function Navbar(props: { setDarkMode: Function; darkmode: boolean }) {
         <ul>
           <Link href="/">Home</Link>
           <Link
-            onClick={() => {
-              dispatch({ type: actionType.CHANGE_FROM_OUTSIDE_LINK });
-              !state.chosenMovie.id ? window.scrollTo(0, 1000) : doNothing();
-            }}
             href={
               state.chosenMovie.id
                 ? `/currentResult/${
@@ -32,7 +28,15 @@ function Navbar(props: { setDarkMode: Function; darkmode: boolean }) {
                 : ""
             }
           >
-            Current result
+            <a
+              onClick={() => {
+                dispatch({ type: actionType.CHANGE_FROM_OUTSIDE_LINK });
+                !state.chosenMovie.id ? window.scrollTo(0, 1000) : doNothing();
+              }}
+            >
+              {" "}
+              Current result
+            </a>
           </Link>
         </ul>
         <ul>

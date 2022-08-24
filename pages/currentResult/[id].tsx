@@ -48,7 +48,7 @@ function CurrentResult() {
       return;
     };
     loadPage();
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     let fav = state.favsMovies.some(
@@ -56,7 +56,7 @@ function CurrentResult() {
     );
     setFav(fav);
   }, [state.favsMovies]);
-  dispatch({ type: actionType.REST_ACTORS });
+
   const rottenTomato = Ratings?.some(
     (entry) => entry.Source === "Rotten Tomatoes"
   )
@@ -67,26 +67,18 @@ function CurrentResult() {
 
   if (youtubeVideos.length >= 1) {
     youtubeElements = youtubeVideos.slice(0, 6).map((entry: youtubeData) => {
-      return entry.video.videoId ? (
-        <YoutubeVideo data={entry.video} key={entry.video.videoId} />
-      ) : (
-        <div></div>
-      );
+      return <YoutubeVideo data={entry.video} key={entry.video.videoId} />;
     });
   }
-
   let ActorsElements;
-
-  if (actorsData.length >= 1) {
+  if (actorsData.length >= 2) {
     ActorsElements = actorsData.map((actor, index) => {
-      return actor.results.primaryName != undefined ? (
+      return (
         <ActorsElement
           data={actor}
           image={actorsImages[index]}
           key={actor.results.primaryName}
         />
-      ) : (
-        <div></div>
       );
     });
   }
@@ -146,6 +138,7 @@ function CurrentResult() {
       return <p>No streaming service found</p>;
     }
   };
+  console.log(actorsData);
 
   return (
     <section className={styles.CurrentResult}>

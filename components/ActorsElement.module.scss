@@ -1,0 +1,33 @@
+@import "../utilits/utilitis.scss";
+
+.Actor {
+  display: flex;
+  flex-direction: column;
+  @include makeShadow;
+  cursor: pointer;
+  transition: 0.7s;
+  border-radius: 5px;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    display: inline-block;
+    text-align: center;
+    gap: 0;
+    h4 {
+      font-size: $fs-medium;
+      color: var(--primary-text-color);
+    }
+    h5 {
+      font-size: $fs-tiny;
+      color: var(--secondary-text-color);
+    }
+  }
+  &__image {
+    width: 18rem;
+    height: 24rem;
+    border-radius: 5px;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
