@@ -1,0 +1,38 @@
+@import "../../utilits/utilitis.scss";
+
+
+.favMovies{
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    &__content{
+        display: grid;
+        grid-auto-columns:auto;
+        gap: 1rem;
+        grid-auto-flow: column;
+        height: 60vh;
+        padding-bottom: 4rem;
+        overflow-x: scroll;
+        margin-top: 4rem;
+        scroll-behavior: smooth;
+        position: relative;
+        transition: all 1s;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+    &__title{
+        text-align: center;
+        font-size: $fs-XL;
+        color: var(--primary-text-color);
+        margin-top: 4rem;
+    }
+    &__noMovies{
+        color: var(--secondary-text-color);
+        text-align: center;
+        font-size: $fs-XL;
+        p{
+            font-size: $fs-medium;
+        }
+    }
+}

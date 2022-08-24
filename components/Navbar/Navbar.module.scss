@@ -1,0 +1,71 @@
+.Navbar {
+  background-color: var(--nav-bg-color);
+  padding: 0.4rem 2rem;
+  scroll-behavior: "smooth";
+  &__headers {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.3rem;
+    margin: 0;
+    color: white;
+    a:link,
+    a:visited {
+      color: white;
+      transition: all 0.5s;
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 1px solid white;
+      padding-bottom: 0.3rem;
+      backface-visibility: hidden;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      gap: 2rem;
+    }
+  }
+  &__darkmodeToggler {
+    width: 6rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.4rem 1.2rem;
+    font-size: 1.6rem;
+    position: relative;
+    border-radius: 20px;
+    cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 40%;
+      height: 100%;
+      top: 0;
+      background-color: var(--tertiary-text-color);
+      z-index: 1;
+      border-radius: 20px;
+    }
+  }
+}
+
+.darkmode {
+  &__active {
+    &::after {
+      transition: all 0.7s;
+      transform: translateX(100%);
+    }
+  }
+  &__inactive {
+    &::after {
+      transition: all 0.7s;
+      transform: translateX(0);
+    }
+  }
+}

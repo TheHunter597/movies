@@ -1,0 +1,216 @@
+@import "../../utilits/utilitis.scss";
+
+.CurrentResult {
+  display: grid;
+  height: auto;
+  position: relative;
+  grid-template-columns: 1fr 3fr 3fr 2fr 1fr;
+  grid-template-areas:
+    ". . . . ."
+    ". image info info ."
+    ". details details . ."
+    ". youtube youtube youtube ."
+    "mainCast mainCast mainCast mainCast mainCast"
+    ". actors actors actors ."
+    ". . . . .";
+  &__addToFav {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    font-size: 3rem;
+    color: #fd746c;
+    cursor: pointer;
+    svg {
+      animation: addToFavAnimation 1s ease-out forwards;
+    }
+  }
+  &__image {
+    grid-area: image;
+    margin-top: 3rem;
+    img {
+      width: 80%;
+      height: 100%;
+    }
+  }
+  &__info {
+    grid-area: info;
+    margin-left: 4rem;
+  }
+  &__title {
+    font-size: $fs-XL;
+    color: var(--primary-text-color);
+  }
+  &__genres {
+    font-size: $fs-large;
+    color: $primary-red;
+  }
+  &__plot {
+    font-size: $fs-medium;
+    color: var(--tertiary-text-color);
+  }
+  &__services {
+    padding-top: 1.5rem;
+    p {
+      margin-top: 1rem;
+      font-size: $fs-medium;
+      color: var(--primary-text-color);
+    }
+    a {
+      font-size: $fs-XL;
+      padding-top: 1rem;
+      display: inline-block;
+      text-decoration: none;
+      animation: makeStreamShake 3s backwards;
+      animation-delay: 3s;
+      animation-iteration-count: infinite;
+      color: var(--secondary-text-color);
+      &:visited,
+      link {
+        color: var(--tertiary-text-color);
+      }
+    }
+  }
+  &__details {
+    grid-area: details;
+    margin: 6rem 0;
+    p {
+      border-bottom: 1px solid var(--tertiary-text-color);
+      padding-top: 1rem;
+      color: var(--primary-text-color);
+      font-size: $fs-medium;
+      padding-bottom: 1rem;
+    }
+    &__rotten {
+      color: red;
+      font-size: $fs-XL;
+    }
+    &__imdb {
+      color: blue;
+      font-size: $fs-XL;
+    }
+  }
+  &__rating {
+    display: flex;
+    gap: 4rem;
+
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 2rem;
+      p {
+        margin-left: 1rem;
+      }
+    }
+  }
+  &__youtube {
+    grid-area: youtube;
+    text-align: center;
+    margin-bottom: 4rem;
+    h3 {
+      font-size: $fs-large;
+      color: var(--primary-text-color);
+    }
+    div {
+      display: inline-block;
+      margin: 2rem;
+      @include makeShadow;
+      width: 16rem;
+      height: 20rem;
+      position: relative;
+      transition: all 0.5s;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    h4 {
+      position: absolute;
+      top: 65%;
+      color: $neutral-pale-red;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      filter: brightness(70%);
+    }
+  }
+  &__actors {
+    grid-area: actors;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-inline: auto;
+    gap: 5rem;
+  }
+  &__mainCast {
+    grid-area: mainCast;
+    text-align: center;
+    font-size: $fs-XL;
+    color: var(--primary-text-color);
+  }
+}
+
+@keyframes addToFavAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 10;
+    transform: scale(1);
+  }
+}
+
+@keyframes makeStreamShake {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: skewX(15deg) translateY(-10px);
+  }
+  40% {
+    transform: skewX(-15deg) translateY(-10px);
+  }
+  60% {
+    transform: skewX(15deg) translateY(-10px);
+  }
+  80% {
+    transform: skewX(-15deg) translateY(-10px);
+  }
+  100% {
+    transform: translate(0) skew(0);
+  }
+}
+
+.Actor {
+  display: flex;
+  flex-direction: column;
+  @include makeShadow;
+  cursor: pointer;
+  transition: 0.7s;
+  border-radius: 5px;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    display: inline-block;
+    text-align: center;
+    gap: 0;
+    h4 {
+      font-size: $fs-medium;
+      color: var(--primary-text-color);
+    }
+    h5 {
+      font-size: $fs-tiny;
+      color: var(--secondary-text-color);
+    }
+  }
+  &__image {
+    width: 18rem;
+    height: 24rem;
+    border-radius: 5px;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
