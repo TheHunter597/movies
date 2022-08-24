@@ -71,18 +71,18 @@ function CurrentResult() {
       return <YoutubeVideo data={entry.video} key={entry.video.videoId} />;
     });
   }
-  // let ActorsElements;
-  // if (actorsData.length >= 2) {
-  //   ActorsElements = actorsData.map((actor, index) => {
-  //     return (
-  //       <ActorsElement
-  //         data={actor}
-  //         image={actorsImages[index]}
-  //         key={nanoid()}
-  //       />
-  //     );
-  //   });
-  // }
+  let ActorsElements;
+  if (actorsData.length >= 2) {
+    ActorsElements = actorsData.map((actor, index) => {
+      return (
+        <ActorsElement
+          data={actor}
+          image={actorsImages[index]}
+          key={nanoid()}
+        />
+      );
+    });
+  }
 
   let streaming = () => {
     if (
@@ -208,7 +208,7 @@ function CurrentResult() {
         {youtubeElements}
       </div>
       <h2 className={styles.CurrentResult__mainCast}>Main cast</h2>
-      {/* <div className={styles.CurrentResult__actors}>{ActorsElements}</div> */}
+      <div className={styles.CurrentResult__actors}>{ActorsElements}</div>
     </section>
   );
 }
