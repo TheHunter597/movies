@@ -10,6 +10,7 @@ import { RiNetflixFill } from "react-icons/ri";
 import YoutubeVideo from "../../components/YoutubeVideos";
 import ActorsElement from "../../components/ActorsElement";
 import { useRouter } from "next/router";
+import { nanoid } from "nanoid";
 
 function CurrentResult() {
   const router = useRouter();
@@ -77,7 +78,7 @@ function CurrentResult() {
         <ActorsElement
           data={actor}
           image={actorsImages[index]}
-          key={actor.results.primaryName}
+          key={nanoid()}
         />
       );
     });
