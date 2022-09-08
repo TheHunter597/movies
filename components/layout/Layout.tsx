@@ -10,7 +10,7 @@ interface props {
 function Layout(props: props) {
   let [darkmode, setDarkMode] = useState(false);
   return (
-    <div className={`${styles.App}  ${darkmode ? styles.root : styles.dark}`}>
+    <div className={`${styles.App}  ${!darkmode ? styles.root : styles.dark}`}>
       <Head>
         <title>Cima</title>
         <meta

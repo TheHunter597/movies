@@ -7,6 +7,7 @@
   width: 100%;
   overflow-x: hidden;
   grid-template-columns: 1fr 3fr 3fr 2fr 1fr;
+  padding-bottom: 4rem;
   grid-template-areas:
     ". . . . ."
     ". image info info ."
@@ -154,10 +155,13 @@
     }
     h4 {
       position: absolute;
-      top: 55%;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: $neutral-pale-red;
-      text-align: center;
       font-size: small;
+      width: 90%;
+      margin-inline: auto;
     }
     img {
       width: 100%;

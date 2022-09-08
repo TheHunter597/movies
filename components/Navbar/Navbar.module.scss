@@ -1,80 +1,135 @@
-@import "../../styles//index.module.scss";
 .Navbar {
-  height: 8rem;
   background-color: var(--nav-bg-color);
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 10px 20px rgba(black, 0.2);
+  padding: 0.4rem 2rem;
+  scroll-behavior: "smooth";
   position: relative;
-
   @media (max-width: 600px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    padding-right: 2rem;
+    height: 6rem;
+    padding: 0.4rem 0;
   }
-  ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  &__headers {
     list-style: none;
-    color: var(--navbar-text-color);
-    font-size: $fs-large;
-    gap: 4rem;
-    li {
-      cursor: pointer;
-      transition: all 0.7s;
-      &:hover {
-        transform: scale(1.1);
-        color: var(--tertiary-text-color);
-      }
-    }
-  }
-  &--fixed {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 2;
-    background-color: rgba(white, 0.5);
-  }
-  &__phone {
-    svg {
-      font-size: $fs-extra;
-    }
-    ul {
-      position: absolute;
-      top: 120%;
-      height: 45vh;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 20px 30px rgba(black, 0.2);
-      padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.3rem;
+    margin: 0;
+    color: white;
+    @media (max-width: 600px) {
       display: flex;
-      width: 80%;
-      @media (max-width: 300px) {
-        width: 90%;
-        left: 5%;
-      }
-      left: 10%;
       flex-direction: column;
       justify-content: center;
-      animation: phoneNavAnimation 1.5s ease-out;
-      z-index: 10;
+      align-items: center;
+      position: absolute;
+      top: 120%;
+      height: 35vh;
+      margin-inline: auto;
+      width: 80%;
+      margin-left: 10%;
+      background-color: var(--nav-bg-color);
+      box-shadow: 0 20px 30px rgba(black, 0.2);
+      z-index: 1;
+      animation: phoneHeaderAnimation 2s ease-out backwards;
+      overflow-x: hidden;
+    }
+    ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      gap: 2rem;
+      li {
+        cursor: pointer;
+        transition: all 0.7s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      @media (max-width: 600px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+      }
+    }
+  }
+  &__darkmodeToggler {
+    width: 9rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.4rem 1.2rem;
+    font-size: 1.6rem;
+    position: relative;
+    border-radius: 20px;
+    cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 40%;
+      height: 100%;
+      top: 0;
+      background-color: var(--tertiary-text-color);
+      z-index: 1;
+      border-radius: 20px;
+    }
+  }
+  &__phone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    align-items: center;
+    list-style: none;
+  }
+  &__bars {
+    margin-right: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: hsl(13, 100%, 96%);
+    padding-inline: 0.4rem;
+    padding-top: 0.5rem;
+    border-radius: 5px;
+    &_active {
+      animation: barsAnimation 2s ease-out forwards;
     }
   }
 }
 
-@keyframes phoneNavAnimation {
+@keyframes phoneHeaderAnimation {
   0% {
     opacity: 0;
     transform: translateX(-100vw);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate(0);
+  }
+}
+
+@keyframes barsAnimation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-140deg);
+  }
+}
+
+.darkmode {
+  &__active {
+    &::after {
+      transition: all 0.7s;
+      transform: translateX(100%);
+    }
+  }
+  &__inactive {
+    &::after {
+      transition: all 0.7s;
+      transform: translateX(0);
+    }
   }
 }

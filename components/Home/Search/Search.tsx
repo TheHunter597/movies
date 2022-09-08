@@ -32,7 +32,7 @@ function Search() {
 
   return (
     <div className={styles.Search} id="Search">
-      <h3 className={`${styles.Search__title} header-secondary`}>
+      <h3 className={`${styles.Search__title} ${styles["header-secondary"]}`}>
         Type the name of the movie or a series name
       </h3>
       <div

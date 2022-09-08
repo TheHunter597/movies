@@ -1,21 +1,19 @@
 import styles from "./CurrentResult.module.scss";
-
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import context from "../../context/context";
 import { state, youtubeData, actionType } from "../../utilits/types";
-
 import { SiRottentomatoes, SiImdb, SiHbo } from "react-icons/si";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { RiNetflixFill } from "react-icons/ri";
 import YoutubeVideo from "../../components/YoutubeVideos";
 import ActorsElement from "../../components/ActorsElement";
 import { useRouter } from "next/router";
 import { nanoid } from "nanoid";
+import Image from "next/image";
+import Head from "next/head";
 
 function CurrentResult() {
   const router = useRouter();
   let id = router.query.id;
-  const [fav, setFav] = useState(false);
 
   const contextData = useContext(context) as {
     dispatch: Function;
@@ -42,21 +40,13 @@ function CurrentResult() {
   useEffect(() => {
     const loadPage = async () => {
       if (id && state.fromOutsideLink) {
-        console.log("HELLO");
-
+        dispatch({ type: actionType.CHANGE_FROM_OUTSIDE_LINK, value: false });
         getAllData(true, id);
       }
       return;
     };
     loadPage();
-  }, []);
-
-  useEffect(() => {
-    let fav = state.favsMovies.some(
-      (entry) => entry.id === state.chosenMovie.id
-    );
-    setFav(fav);
-  }, [state.favsMovies]);
+  }, [id, state.fromOutsideLink]);
 
   const rottenTomato = Ratings?.some(
     (entry) => entry.Source === "Rotten Tomatoes"
@@ -139,35 +129,14 @@ function CurrentResult() {
       return <p>No streaming service found</p>;
     }
   };
-  console.log(actorsData);
 
   return (
     <section className={styles.CurrentResult}>
+      <Head>
+        <title>{state.chosenMovie.data.Title}</title>
+      </Head>
       <div className={styles.CurrentResult__image}>
-        <img src={Poster} alt="" />
-      </div>
-
-      <div
-        className={styles.CurrentResult__addToFav}
-        onClick={() => {
-          let repeat = state.favsMovies.some((entry) => {
-            return state.chosenMovie.id === entry.id;
-          });
-
-          !repeat && !fav
-            ? dispatch({
-                type: actionType.ADD_FAV_MOVIE,
-                value: state.chosenMovie,
-              })
-            : dispatch({
-                type: actionType.REMOVE_FAV_MOVIE,
-                value: state.favsMovies.filter(
-                  (entry) => entry.id != state.chosenMovie.id
-                ),
-              });
-        }}
-      >
-        {fav ? <AiFillHeart /> : <AiOutlineHeart />}
+        <Image height={600} width={350} src={Poster} alt="poster" />
       </div>
 
       <div className={styles.CurrentResult__info}>

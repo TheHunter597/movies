@@ -61,7 +61,7 @@
       outline: none;
       font-size: $fs-XL;
       color: red;
-      top: 60%;
+      top: 52%;
       position: absolute;
       &:hover {
         transform: scale(1.2);
@@ -116,63 +116,3 @@
     font-size: $fs-large;
   }
 }
-
-// .dropdown {
-//   &__loader {
-//     color: red;
-//     text-align: center;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: center;
-//     align-items: center;
-//   }
-//   &__content {
-//     display: flex;
-//     flex-direction: column;
-//     text-align: center;
-//     align-content: center;
-//     padding: 1rem;
-//     background-color: var(--dropdown-color);
-//     transition: all 0.7s;
-//     cursor: pointer;
-//     padding-bottom: 0;
-//     position: relative;
-//     padding-top: 2rem;
-//     @media (max-width: 600px) {
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//     }
-//     @include makeShadow;
-//     &:hover {
-//       transform: scale(1.04);
-//     }
-//   }
-//   &__image {
-//     img {
-//       width: 12rem;
-//       height: 16rem;
-//     }
-//     text-align: center;
-//   }
-//   &__info {
-//     display: flex;
-//     flex-direction: column;
-//     text-align: center;
-//     align-items: center;
-//     justify-content: center;
-//     h3 {
-//       text-align: center;
-//     }
-//   }
-//   &__removeMovie {
-//     font-size: $fs-large;
-//     padding: 0.4rem 1rem;
-//     height: fit-content;
-//     margin-bottom: 0.4rem;
-//     z-index: 100;
-//     p {
-//       margin: 0;
-//     }
-//   }
-// }
