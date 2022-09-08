@@ -1,12 +1,14 @@
+import { useRouter } from "next/router";
 import styles from "./Header.module.scss";
 
 function Header() {
+  const router = useRouter();
   return (
     <div className={styles.Header}>
       <div className={styles.Header__title}>
         <h1 className={styles.Header__header}>
-          <span className="header-primary">Cinema for you</span>
-          <span className="header-secondary">
+          <span className={styles["header-primary"]}>Cinema for you</span>
+          <span className={styles["header-secondary"]}>
             A place where you find anything about movies .
           </span>
         </h1>
@@ -18,8 +20,8 @@ function Header() {
           actors
         </p>
         <button
-          className={`button-primary ${styles.Header__button}`}
-          onClick={() => window.scrollTo(0, 600)}
+          className={`${styles["button-primary"]}  ${styles.Header__button}`}
+          onClick={() => router.push("/#Search")}
         >
           Get started
         </button>
