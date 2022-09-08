@@ -1,0 +1,152 @@
+@import "../../../styles/index.module.scss";
+
+.contact {
+  background-color: var(--about-bg-color);
+  padding: 5rem 1rem;
+  margin-top: 5rem;
+  &__content {
+    width: min(95%, 1200px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 0.1fr 0.3fr 0.3fr 0.4fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: " . social nav form";
+    @media (max-width: 700px) {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.1fr 0.2fr 0.2fr 0.6fr;
+      grid-template-areas:
+        "."
+        "social"
+        "nav"
+        "form";
+    }
+  }
+  &__nav {
+    grid-area: nav;
+    font-size: $fs-medium;
+    ul {
+      list-style: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      @media (max-width: 700px) {
+        text-align: center;
+        margin-inline: auto;
+        padding-left: 0;
+        gap: 2.3rem;
+        margin: 5rem 0;
+      }
+
+      li {
+        cursor: pointer;
+        transition: all 0.7s;
+        &:hover {
+          color: var(--tertiary-text-color);
+          transform: scale(1.15) translateX(15px);
+        }
+      }
+    }
+  }
+  &__social {
+    grid-area: social;
+    @media (max-width: 700px) {
+      display: flex;
+      flex-direction: row;
+      gap: 3rem;
+      text-align: center;
+      margin-inline: auto;
+    }
+    @media (max-width: 350px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    div {
+      display: flex;
+      flex-direction: row;
+      gap: 1.2rem;
+      @media (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      h4 {
+        font-size: $fs-small;
+        color: white;
+      }
+      button {
+        background-color: transparent;
+        border: none;
+        font-size: $fs-XXL;
+        color: white;
+        cursor: pointer;
+        transition: all 0.5s;
+        @media (max-width: 400px) {
+          font-size: $fs-XL;
+        }
+        &:hover {
+          color: var(--tertiary-text-color);
+        }
+      }
+    }
+  }
+  &__form {
+    grid-area: form;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    input,
+    textarea {
+      width: 80%;
+      margin-inline: auto;
+      font-size: $fs-medium;
+      padding: 0.6rem 1.5rem;
+      outline: none;
+      border-radius: 5px;
+      border: none;
+      &::placeholder {
+        color: var(--navbar-text-color);
+      }
+    }
+    textarea {
+      height: 10rem;
+    }
+    button {
+      width: 30%;
+      margin-inline: auto;
+      background-color: var(--element-secondary-bg-color);
+      padding: 1rem 2rem;
+      font-size: $fs-medium;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.5s;
+      @media (max-width: 450px) {
+        width: 42%;
+      }
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+  &__message {
+    &--error {
+      color: red;
+      font-size: $fs-small;
+      text-align: center;
+    }
+    &--sucess {
+      color: green;
+      font-size: $fs-small;
+      text-align: center;
+    }
+  }
+}
+
+.error {
+  border: 1px solid red !important;
+}

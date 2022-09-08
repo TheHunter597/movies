@@ -1,149 +1,68 @@
-import styles from "./Navbar.module.scss";
-import context from "../../context/context";
-import { useContext, useState, useEffect } from "react";
-import { state, actionType } from "../../utilits/types";
-import { BiSun } from "react-icons/bi";
-import { BsMoonFill } from "react-icons/bs";
 import Link from "next/link";
+import { useContext, useState } from "react";
+import context from "../../context/context";
+import styles from "./Navbar.module.scss";
 import { FaBars } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
+function Navbar() {
+  const contextData = useContext(context) as {
+    fixNavbar: boolean;
+    phoneUser: boolean;
+  };
+  const { fixNavbar, phoneUser } = contextData;
+  const [openNav, setOpenNav] = useState(false);
 
-function Navbar(props: { setDarkMode: Function; darkmode: boolean }) {
-  const data = useContext(context) as { state: state; dispatch: Function };
-  let { darkmode, setDarkMode } = props;
-  let { state, dispatch } = data;
-  const [showHeader, setShowHeader] = useState(false);
-  useEffect(() => {
-    window.innerWidth < 600
-      ? dispatch({ type: actionType.CHANGE_PHONE_USER, value: true })
-      : dispatch({ type: actionType.CHANGE_PHONE_USER, value: false });
-    window.addEventListener("resize", () =>
-      window.innerWidth < 600
-        ? dispatch({ type: actionType.CHANGE_PHONE_USER, value: true })
-        : dispatch({ type: actionType.CHANGE_PHONE_USER, value: false })
+  const sections = ["Skills", "Projects", "Contact"];
+  const links = sections.map((link) => {
+    return (
+      <li key={link} onClick={() => setOpenNav((prev) => !prev)}>
+        <Link href={`/#${link}`}>{link}</Link>
+      </li>
     );
-    return () => {
-      window.removeEventListener("resize", () =>
-        window.innerWidth < 600
-          ? dispatch({ type: actionType.CHANGE_PHONE_USER, value: true })
-          : dispatch({ type: actionType.CHANGE_PHONE_USER, value: false })
-      );
-    };
-  }, []);
-  let phoneNavbar = (
-    <>
-      <ul className={styles.Navbar__phone}>
-        <li
-          className={`${styles.Navbar__darkmodeToggler} ${
-            darkmode ? styles.darkmode__active : styles.darkmode__inactive
-          }`}
-          onClick={() => setDarkMode((prev: boolean) => !prev)}
-        >
-          <BsMoonFill />
-          <BiSun />
-        </li>
-        <li
-          onClick={() => setShowHeader((prev) => !prev)}
-          className={`${styles.Navbar__bars}  ${
-            showHeader ? styles.Navbar__bars_active : ""
-          }`}
-        >
-          <FaBars />
-        </li>
-      </ul>
-      {showHeader ? (
-        <div className={styles.Navbar__headers}>
-          <ul>
-            <Link href="/">
-              <a onClick={() => setShowHeader(false)}>Home</a>
-            </Link>
-            <Link
-              href={
-                state.chosenMovie.id
-                  ? `/currentResult/${
-                      state.chosenMovie.id != undefined
-                        ? `/${state.chosenMovie.id}`
-                        : ""
-                    }`
-                  : ""
-              }
-            >
-              <a
-                onClick={() => {
-                  setShowHeader(false);
-                  dispatch({ type: actionType.CHANGE_FROM_OUTSIDE_LINK });
-                  !state.chosenMovie.id
-                    ? window.scrollTo(0, 1000)
-                    : doNothing();
-                }}
-              >
-                {" "}
-                Current result
-              </a>
-            </Link>
-          </ul>
-          <ul>
-            <Link href="/favMovies">
-              <a onClick={() => setShowHeader(false)}>Favourites list</a>
-            </Link>
-          </ul>
-        </div>
-      ) : (
-        ""
-      )}
-    </>
-  );
-  function doNothing() {
-    return;
-  }
+  });
   return (
-    <div className={styles.Navbar}>
-      {!state.phoneUser ? (
-        <div className={styles.Navbar__headers}>
-          <ul>
+    <nav
+      className={`${styles["Navbar"]} ${
+        fixNavbar ? styles["Navbar--fixed"] : ""
+      }`}
+    >
+      {!phoneUser ? (
+        <ul>
+          <li
+            onClick={() => {
+              setOpenNav((prev) => !prev);
+            }}
+          >
             <Link href="/">Home</Link>
-            <Link
-              href={
-                state.chosenMovie.id
-                  ? `/currentResult/${
-                      state.chosenMovie.id != undefined
-                        ? `/${state.chosenMovie.id}`
-                        : ""
-                    }`
-                  : ""
-              }
-            >
-              <a
+          </li>
+          {links}
+        </ul>
+      ) : (
+        <div className={styles["Navbar__phone"]}>
+          <div
+            onClick={() => {
+              setOpenNav((prev) => !prev);
+            }}
+          >
+            {!openNav ? <FaBars /> : <AiOutlineClose />}
+          </div>
+          {openNav ? (
+            <ul>
+              <li
                 onClick={() => {
-                  dispatch({ type: actionType.CHANGE_FROM_OUTSIDE_LINK });
-                  !state.chosenMovie.id
-                    ? window.scrollTo(0, 1000)
-                    : doNothing();
+                  setOpenNav((prev) => !prev);
                 }}
               >
-                {" "}
-                Current result
-              </a>
-            </Link>
-          </ul>
-          <ul>
-            <li
-              className={`${styles.Navbar__darkmodeToggler} ${
-                darkmode ? styles.darkmode__active : styles.darkmode__inactive
-              }`}
-              onClick={() => setDarkMode((prev: boolean) => !prev)}
-            >
-              <BsMoonFill />
-              <BiSun />
-            </li>
-          </ul>
-          <ul>
-            <Link href="/favMovies">Movies list</Link>
-          </ul>
+                <Link href="/">Home</Link>
+              </li>
+              {links}
+            </ul>
+          ) : (
+            ""
+          )}
         </div>
-      ) : (
-        phoneNavbar
       )}
-    </div>
+    </nav>
   );
 }
 

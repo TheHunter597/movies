@@ -1,7 +1,6 @@
-import "../styles/globals.scss";
-import "normalize.css/normalize.css";
+import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/Layout";
 import { ContextProvider } from "../context/context";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
