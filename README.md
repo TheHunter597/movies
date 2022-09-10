@@ -15,3 +15,7 @@ A webiste where you can search for a movie or a series get some info about
 - Next js
 - Typescript
 - Sass
+
+## Note
+
+- if you are woundring why scss makes up 83% of the website well because the background svg image is written inside scss file and it is huuuuge
