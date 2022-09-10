@@ -1,6 +1,6 @@
 import Navbar from "../Navbar/Navbar";
 import styles from "../../styles/app.module.scss";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
 
 interface props {
