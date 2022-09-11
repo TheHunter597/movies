@@ -21,7 +21,7 @@ export let getMoviesInfo = async (
     try {
       let data = await fetchData(
         "https://www.omdbapi.com/",
-        getMoviesInfoOptions(movieName, page)
+        getMoviesInfoOptions(movieName.trim(), page)
       );
       return data;
     } catch (e: any) {
